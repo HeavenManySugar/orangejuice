@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 const links = [
     { href: '/login', label: 'Login' },
+    { href: '/admin', label: 'Admin' },
 ];
 
 const Navbar = () => {
