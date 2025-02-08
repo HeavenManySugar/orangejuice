@@ -29,7 +29,7 @@ export default function Gitea<P extends GiteaProfile>(
       },
     },
     profile: (profile) => {
-      console.log('profile', profile)
+      // console.log('profile', profile)
       return {
         id: profile.sub,
         name: profile.preferred_username,

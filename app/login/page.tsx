@@ -15,7 +15,7 @@ function Page() {
             )}
             {status === "authenticated" && session && (
                 <>
-                    {console.log(session)}
+                    {/* {console.log(session)} */}
                     <button onClick={() => signOut()}>Sign out</button>
                 </>
             )}
