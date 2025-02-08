@@ -16,6 +16,9 @@ function Page() {
             {status === "authenticated" && session && (
                 <>
                     {/* {console.log(session)} */}
+                    <p>Signed in as {session?.user?.email} <br /> {session?.user?.name}</p>
+                    <img src={session?.user?.image ?? ''} alt={session?.user?.name ?? 'User'} />
+                    <br />
                     <button onClick={() => signOut()}>Sign out</button>
                 </>
             )}
