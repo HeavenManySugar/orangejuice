@@ -2,7 +2,7 @@
 
 import { SessionProvider, signIn, signOut, useSession } from "next-auth/react"
 
-function Page() {
+export default function LoginPage() {
     const { data: session, status } = useSession()
 
     return (
@@ -18,18 +18,11 @@ function Page() {
                     {/* {console.log(session)} */}
                     <p>Signed in as {session?.user?.email} <br /> {session?.user?.name}</p>
                     <img src={session?.user?.image ?? ''} alt={session?.user?.name ?? 'User'} />
+                    <span style={{ userSelect: 'all' }}>token {session.accessToken}</span>
                     <br />
                     <button onClick={() => signOut()}>Sign out</button>
                 </>
             )}
         </>
-    )
-}
-
-export default function LoginPage() {
-    return (
-        <SessionProvider>
-            <Page />
-        </SessionProvider>
     )
 }
