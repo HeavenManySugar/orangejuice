@@ -1,6 +1,7 @@
 'use client';
 
 import { useSession } from "next-auth/react"
+import Image from "next/image";
 import useSWR from 'swr'
 
 type Organization = {
@@ -41,8 +42,17 @@ export default function Organizations() {
         <div>
             <h1>Organizations Page</h1>
             {data && data.map((org: any) => (
-                <div key={org.id}>
-                    {org.name}
+                <div key={org.id} className="m-3 max-w-sm w-full lg:max-w-full lg:flex">
+                    <Image
+                        src={org.avatar_url}
+                        alt={org.name}
+                        width={100}
+                        height={100}
+                    />
+                    <div className='ml-2'>
+                        <h2>{org.name}</h2>
+                        <p className="mt-2">{org.description}</p>
+                    </div>
                 </div>
             ))}
         </div>
