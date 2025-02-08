@@ -9,7 +9,17 @@ const nextConfig: NextConfig = {
         destination: "http://server.gitea.orb.local/api/v1/:path*", // Proxy to Backend
       },
     ];
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "server.gitea.orb.local",
+        port: '',
+        pathname: "/avatars/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
