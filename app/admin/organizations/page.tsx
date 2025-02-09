@@ -41,7 +41,7 @@ export default function Organizations() {
     return (
         <div>
             <h1>Organizations Page</h1>
-            {data && data.map((org: any) => (
+            {data && Array.isArray(data) && data.map((org: any) => (
                 <div key={org.id} className="m-3 max-w-sm w-full lg:max-w-full lg:flex">
                     <Image
                         src={org.avatar_url}
