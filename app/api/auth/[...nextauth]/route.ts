@@ -1,5 +1,7 @@
-import NextAuth from "next-auth"
+import NextAuth, { User } from "next-auth"
 import GiteaProvider from "./providers/gitea"
+import { AdapterUser } from "next-auth/adapters";
+
 import 'dotenv/config'
 
 declare module "next-auth" {
@@ -17,14 +19,26 @@ const handler = NextAuth({
         }),
     ],
     callbacks: {
-        async jwt({ token, account }) {
-          if (account) {
-            token.accessToken = account.access_token;
+        async jwt({ token, account, user }) {
+          if (account && user) {
+            return {
+              accessToken: account.access_token,
+              accessTokenExpires: account.expires_at,
+              refreshToken: account.refresh_token,
+              user,
+            }
+          }
+          
+          if (Date.now() < (token.accessTokenExpires as number)) {
+            return token;
           }
           return token;
         },
         async session({ session, token }) {
-          session.accessToken = token.accessToken as string;
+          if (token) {
+            session.user = token.user as User | AdapterUser;
+            session.accessToken = token.accessToken as string;
+          }
           return session;
         },
       },    
