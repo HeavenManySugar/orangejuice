@@ -11,7 +11,6 @@ export default async function Page(props: Props) {
 
     return (
         <div>
-            <p>Post: {params.org}</p>
             <OrgShow org={params.org} />
         </div>
     )

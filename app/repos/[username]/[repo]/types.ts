@@ -125,7 +125,7 @@ export type Repository = {
     open_pr_counter: number;
     original_url: string;
     owner: Owner;
-    parent: string;
+    parent: Repository;
     permissions: Permissions;
     private: boolean;
     projects_mode: string;

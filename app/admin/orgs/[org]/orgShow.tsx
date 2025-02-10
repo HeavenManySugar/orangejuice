@@ -2,8 +2,8 @@
 
 import { useSession } from "next-auth/react"
 import useSWR from 'swr'
-import { Repository } from "@/components/Repos/types";
-import ShowRepos from "@/components/Repos";
+import { Repository } from "@/components/ShowRepos/types";
+import ShowRepos from "@/components/ShowRepos";
 
 const fetcher = (...args: [RequestInfo, RequestInit?]) => fetch(...args).then(res => res.json())
 
@@ -30,7 +30,7 @@ export default function OrgShow({ org }: OrgShowProps) {
     );
 
     return (
-        <div>
+        <div className="mt-3 mx-auto max-w-7xl">
             <h1>Repository Page</h1>
             <ShowRepos data={data!} session={session!} isOrg={true} />
         </div>

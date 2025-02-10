@@ -2,8 +2,8 @@
 
 import { useSession } from "next-auth/react"
 import useSWR from 'swr'
-import { Repository } from "@/components/Repos/types";
-import ShowRepos from "@/components/Repos";
+import { Repository } from "@/components/ShowRepos/types";
+import ShowRepos from "@/components/ShowRepos";
 
 declare module "next-auth" {
     interface Session {
@@ -40,7 +40,7 @@ export default function Repos() {
     );
 
     return (
-        <div>
+        <div className="mt-3 mx-auto max-w-7xl">
             <h1>Repository Page</h1>
             <ShowRepos data={data!} session={session!} />
         </div>

@@ -12,7 +12,6 @@ export default async function Page(props: Props) {
 
     return (
         <div>
-            <p>Post: {params.repo}</p>
             <RepoShow username={params.username} repo={params.repo} />
         </div>
     )
