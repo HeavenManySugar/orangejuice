@@ -4,6 +4,7 @@ import Link from 'next/link';
 const links = [
     { href: '/login', label: 'Login' },
     { href: '/admin', label: 'Admin' },
+    { href: '/repos', label: 'Repos' },
 ];
 
 const Navbar = () => {
