@@ -9,6 +9,12 @@ declare module "next-auth" {
     accessToken?: string;
     accessTokenExpires?: number;
     refreshToken?: string;
+    user?: {
+      id?: number;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+  };
   }
 }
 
