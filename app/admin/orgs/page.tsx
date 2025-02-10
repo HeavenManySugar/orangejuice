@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react"
 import Image from "next/image";
+import Link from "next/link";
 import useSWR from 'swr'
 
 type Organization = {
@@ -50,7 +51,7 @@ export default function Organizations() {
                         height={100}
                     />
                     <div className='ml-2'>
-                        <h2>{org.name}</h2>
+                        <h2><Link href={`/admin/orgs/${org.name}`} className="link-primary">{org.name}</Link></h2>
                         <p className="mt-2">{org.description}</p>
                     </div>
                 </div>
