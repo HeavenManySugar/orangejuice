@@ -20,9 +20,15 @@ export default function ShowRepos({ data, session, isOrg }: { data: Repository[]
                         </figure>
                     </div>
                     <div className="card-body p-0">
-                        <Link href={`/repos/${repo.owner.login}/${repo.name}`} className="card-title link-primary">
-                            {repo.name}
-                        </Link>
+                        <div className="flex items-center space-x-2">
+                            <Link href={`/repos/${repo.owner.login}/${repo.name}`} className="card-title link-primary">
+                                {repo.name}
+                            </Link>
+                            {repo.private ? (
+                                <span className="bg-black border border-gray-400 p-1 rounded">
+                                    <span className="mx-2 text-white">私有</span>
+                                </span>) : null}
+                        </div>
                         <p>更新於 {new Date(repo.updated_at).toLocaleDateString()}</p>
                     </div>
                 </div>
