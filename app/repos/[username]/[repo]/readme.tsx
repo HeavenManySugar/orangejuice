@@ -26,7 +26,7 @@ export default function Readme({ username, repo }: { username: string, repo: str
     );
 
     return (
-        <div className="card bg-base-100 shadow-xl card-bordered m-5">
+        <div className="card bg-base-100 shadow-xl card-bordered my-5">
             <div className='card-title m-2'>
                 <GoBook />
                 <h2>README.md</h2>

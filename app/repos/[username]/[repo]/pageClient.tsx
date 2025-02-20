@@ -12,9 +12,10 @@ const fetcher = (...args: [RequestInfo, RequestInit?]) => fetch(...args).then(re
 type RepoShowProps = {
     username: string;
     repo: string;
+    tab: string;
 };
 
-export default function RepoShow({ username, repo }: RepoShowProps) {
+export default function RepoShow({ username, repo, tab }: RepoShowProps) {
     const { data: session } = useSession();
 
     const shouldFetch = !!session?.accessToken;
@@ -47,7 +48,20 @@ export default function RepoShow({ username, repo }: RepoShowProps) {
             ) : (
                 null
             )}
-            <Reademe username={username} repo={repo} />
+            <div role="tablist" className="tabs tabs-bordered whitespace-nowrap">
+                <input type="radio" name="repoView" role="tab" className="tab" aria-label="Readme" defaultChecked={tab == 'readme'} />
+                <div role="tabpanel" className="tab-content">
+                    <Reademe username={username} repo={repo} />
+                </div>
+
+                <input type="radio" name="repoView" role="tab" className="tab" aria-label="Score" defaultChecked={tab == 'score'} />
+                <div role="tabpanel" className="tab-content p-10">
+
+                </div>
+
+                <input type="radio" name="repoView" role="tab" className="tab" aria-label="Tab 3" />
+                <div role="tabpanel" className="tab-content p-10">Tab content 3</div>
+            </div>
         </div>
     );
 }
