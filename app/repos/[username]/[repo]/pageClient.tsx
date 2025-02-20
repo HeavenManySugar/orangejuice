@@ -6,6 +6,8 @@ import Reademe from '@/app/repos/[username]/[repo]/readme'
 import { Repository } from '@/app/repos/[username]/[repo]/types'
 import { GoRepo, GoRepoForked } from "react-icons/go";
 import Link from "next/link";
+import Score from "./score";
+import { useState } from "react";
 
 const fetcher = (...args: [RequestInfo, RequestInit?]) => fetch(...args).then(res => res.json())
 
@@ -15,8 +17,9 @@ type RepoShowProps = {
     tab: string;
 };
 
-export default function RepoShow({ username, repo, tab }: RepoShowProps) {
+export default function RepoShow({ username, repo, tab: defaultTab }: RepoShowProps) {
     const { data: session } = useSession();
+    const [tab, setTab] = useState(defaultTab);
 
     const shouldFetch = !!session?.accessToken;
 
@@ -49,17 +52,17 @@ export default function RepoShow({ username, repo, tab }: RepoShowProps) {
                 null
             )}
             <div role="tablist" className="tabs tabs-bordered whitespace-nowrap">
-                <input type="radio" name="repoView" role="tab" className="tab" aria-label="Readme" defaultChecked={tab == 'readme'} />
+                <input type="radio" name="repoView" role="tab" className="tab" aria-label="Readme" defaultChecked={tab == 'readme'} onChange={() => setTab('readme')} />
                 <div role="tabpanel" className="tab-content">
-                    <Reademe username={username} repo={repo} />
+                    {tab === 'readme' && <Reademe username={username} repo={repo} />}
                 </div>
 
-                <input type="radio" name="repoView" role="tab" className="tab" aria-label="Score" defaultChecked={tab == 'score'} />
+                <input type="radio" name="repoView" role="tab" className="tab" aria-label="Score" defaultChecked={tab == 'score'} onChange={() => setTab('score')} />
                 <div role="tabpanel" className="tab-content p-10">
-
+                    {tab === 'score' && <Score username={username} repo={repo} />}
                 </div>
 
-                <input type="radio" name="repoView" role="tab" className="tab" aria-label="Tab 3" />
+                <input type="radio" name="repoView" role="tab" className="tab" aria-label="Tab 3" onChange={() => setTab('tab3')} />
                 <div role="tabpanel" className="tab-content p-10">Tab content 3</div>
             </div>
         </div>

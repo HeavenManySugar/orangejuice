@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         source: "/api/v1/:path*",
         destination: "http://server.gitea.orb.local/api/v1/:path*", // Proxy to Backend
       },
+      {
+        source: "/api/score/:path*",
+        destination: "http://127.0.0.1:3001/api/score/:path*", // Proxy to Backend
+      }
     ];
   },
   images: {
