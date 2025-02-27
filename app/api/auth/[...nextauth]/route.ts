@@ -10,7 +10,7 @@ declare module "next-auth" {
     accessTokenExpires?: number;
     refreshToken?: string;
     user?: {
-      id?: number;
+      id?: string;
       name?: string | null;
       email?: string | null;
       image?: string | null;
