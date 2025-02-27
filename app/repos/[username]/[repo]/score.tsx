@@ -4,21 +4,23 @@ import { useSession } from "next-auth/react"
 import useSWR from 'swr'
 import ansiHTML from 'ansi-html';
 
+type ScoreData = {
+    createdAt: string;
+    deletedAt: {
+        time: string;
+        valid: boolean;
+    };
+    git_repo: string;
+    id: number;
+    message: string;
+    score: number;
+    updatedAt: string;
+}
+
 type Score = {
     message: string;
     success: boolean;
-    data: {
-        createdAt: string;
-        deletedAt: {
-            time: string;
-            valid: boolean;
-        };
-        git_repo: string;
-        id: number;
-        message: string;
-        score: number;
-        updatedAt: string;
-    };
+    data: ScoreData[];
 }
 
 const fetcher = (...args: [RequestInfo, RequestInit?]) => fetch(...args).then(res => res.json())
@@ -29,7 +31,7 @@ export default function Score({ username, repo }: { username: string, repo: stri
 
     const { data } = useSWR<Score>(
         shouldFetch ? [
-            `/api/score?repo=${username}%2F${repo}`,
+            `/api/score?owner=${username}&repo=${repo}&limit=1`,
             {
                 method: 'GET',
                 // headers: {
@@ -45,7 +47,7 @@ export default function Score({ username, repo }: { username: string, repo: stri
             {data ? (
                 <div className="card-body">
                     <h2 className="card-title">Score</h2>
-                    <p className="whitespace-pre">{ansiHTML(data.data.message)}</p>
+                    <p className="whitespace-pre font-mono">{ansiHTML(data.data[0].message)}</p>
                 </div>
             ) : (
                 <div className="card-body">
