@@ -44,15 +44,20 @@ export default function Score({ username, repo }: { username: string, repo: stri
 
     return (
         <div className="card bg-base-100 shadow-xl card-bordered my-5">
-            {data ? (
+            {data && data.data ? (
                 <div className="card-body">
                     <h2 className="card-title">Score</h2>
                     <p className="whitespace-pre font-mono">{ansiHTML(data.data[0].message)}</p>
                 </div>
+            ) : data ? (
+                <div className="card-body">
+                    <h2 className="card-title">Score</h2>
+                    <p className="whitespace-pre font-mono">{data.message}</p>
+                </div>
             ) : (
                 <div className="card-body">
                     <h2 className="card-title">Score</h2>
-                    <p>Loading...</p>
+                    <p className="whitespace-pre font-mono">Loading...</p>
                 </div>
             )}
         </div>
